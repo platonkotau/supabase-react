@@ -1,4 +1,4 @@
-
+import Notes from './Notes/Notes'
 import { useState } from 'react'
 import { supabase } from './supabaseClient'
 
@@ -60,7 +60,14 @@ import { supabase } from './supabaseClient'
         <a onClick={() => setIsLogin(!isLogin)}>{isLogin ? "нет аккаунта? Зарегестрируйся" : "Войди в аккаунт"}</a>
 
         {message && <p>{message}</p>}
+
+
+
+        <Notes />
       </div>
+
+
+
     )
 }
 
