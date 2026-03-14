@@ -1,69 +1,23 @@
 import Notes from './Notes/Notes'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient'
+import Login from './Login/Login'
 
 
   function App() {
-  const [password, setPassword] = useState('')
-  const [email, setEmail] = useState('')
-  const [isLogin, setIsLogin] = useState(true)
-  const [message, setMessage] = useState('')
+    const [login, setLogin] = useState(null)
 
-
-    async function SingIn() {
-      const {error} = await supabase.auth.signInWithPassword({email,password})
-      if (error) {
-        setMessage('Ошибка' + error.message)
-      } else {
-        setMessage('ты вошел красава')
-      }
-    }
-
-    async function SingUp() {
-      const {error} = await supabase.auth.signUp({email,password})
-      if (error) {
-        setMessage('Ошибка' + error.message)
-      } else {
-        setMessage('Проверь почту)')
-      }
-    }
-
-    function Submit(){
-      if(isLogin) {
-        SingIn()
-      } else {
-        SingUp()
-      }
-    }
-
+    useEffect(() => {
+        async function checkUser() {
+            const { data: { user } } = await supabase.auth.getUser()
+            setLogin(user)
+        }
+        checkUser()
+        }, [])
 
     return(
       <div>
-        <h2>{isLogin ? 'Вход' : 'Регистрация'}</h2>
-
-        <input
-          type='email'
-          placeholder='введи email'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-
-         <input
-          type='password'
-          placeholder='введи password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-
-        <button onClick={Submit}>{isLogin ? 'Войди в аккаунт' : 'Зарегестрируйся'}</button>
-
-        <a onClick={() => setIsLogin(!isLogin)}>{isLogin ? "нет аккаунта? Зарегестрируйся" : "Войди в аккаунт"}</a>
-
-        {message && <p>{message}</p>}
-
-
-
-        <Notes />
+        {login ? <Notes setLogin={setLogin} /> : <Login setLogin={setLogin} />}
       </div>
 
 
