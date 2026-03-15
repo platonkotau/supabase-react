@@ -56,14 +56,17 @@ export default function Notes({setLogin}) {
 
 
     return (
-        <div>
+        <div className="">
             <br />
-
-            <input type="text" value={title} placeholder="title" onChange={(e) => setTitle(e.target.value)} />
+            <div className="flex gap-1">
+            <input  className='bg-white rounded-sm border-0.5 p-1' type="text" value={title} placeholder="title" onChange={(e) => setTitle(e.target.value)} />
             <br />
-            <input type="text" value={desc} placeholder="description" onChange={(e) => setDesc(e.target.value)} />
-
-            <button onClick={addNote}>+</button>
+            <input className='bg-white rounded-sm border-0.5 p-1' type="text" value={desc} placeholder="description" onChange={(e) => setDesc(e.target.value)} />
+            
+            <button  className='bg-white rounded-sm p-3 active:dark:bg-blue-300 hover:dark:bg-blue-100' onClick={addNote}>+</button>
+            </div>
+            <br />
+            
             
 
 
@@ -72,22 +75,27 @@ export default function Notes({setLogin}) {
                     setEdit(note.id)
                     setEtitle(note.name)
                     setEdesc(note.descripiton)
-                        }}>
-                <h1>{note.name}</h1>
-                <p>{note.descripiton}</p>
-                <button onClick={() => deleteNote(note.id)}>-</button>
+                        }} >
+                <div className="border-2 p-1 rounded-md flex justify-between items-center">
+                    <div>
+                        <h1 className="text-xl font-bold">{note.name}</h1>
+                        <p className="text-sm font-light">{note.descripiton}</p>
+                    </div>
+                <button className='bg-white rounded-sm px-3 py-1 m-2 active:dark:bg-blue-300 hover:dark:bg-blue-100' onClick={() => deleteNote(note.id)}>-</button>
+                </div>
+
                 {edit === note.id && (
                     <div onClick={(e) => e.stopPropagation()}>
-                        <input value={Etitle} onChange={(e) => setEtitle(e.target.value)}/>
-                        <input value={Edesc} onChange={(e) => setEdesc(e.target.value)}/>
-                        <button onClick={updateNote}>Update</button>
+                        <input className="bg-white rounded-sm border-0.5 p-1 mx-1" value={Etitle} onChange={(e) => setEtitle(e.target.value)} />
+                        <input className="bg-white rounded-sm border-0.5 p-1 mx-1" value={Edesc} onChange={(e) => setEdesc(e.target.value)} />
+                        <button className='bg-white rounded-sm px-2 py-1 m-1 active:dark:bg-blue-300 hover:dark:bg-blue-100' onClick={updateNote}>Update</button>
                     </div>
                 )}
                 </div>
             ))}
 
             <br />
-        <button onClick={() => logout()}>LogOut</button>
+        <button className="bg-white p-2 rounded-md active:dark:bg-blue-300 hover:dark:bg-blue-100" onClick={() => logout()}>LogOut</button>
         </div>
     )
 }

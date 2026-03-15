@@ -37,7 +37,7 @@ function Login({setLogin}) {
 
 
     return(
-      <div>
+      <div className=''>
         <h2>{isLogin ? 'Вход' : 'Регистрация'}</h2>
 
         <input

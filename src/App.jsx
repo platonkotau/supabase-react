@@ -16,7 +16,9 @@ import Login from './Login/Login'
         }, [])
 
     return(
-      <div>
+      <div className='bg-gray-100 flex justify-center min-h-screen'>
+        
+
         {login ? <Notes setLogin={setLogin} /> : <Login setLogin={setLogin} />}
       </div>
 
