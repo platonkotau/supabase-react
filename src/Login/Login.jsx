@@ -1,7 +1,7 @@
 
 import { useState } from 'react'
 import { supabase } from '../supabaseClient'
-function Login({setLogin}) {
+function Login({setLogin , setPage}) {
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
   const [isLogin, setIsLogin] = useState(true)
@@ -14,6 +14,7 @@ function Login({setLogin}) {
         setMessage('Erorr:' + error.message)
       } else {
         setLogin(data.user)
+        setPage('profile')
 
       }
     }
