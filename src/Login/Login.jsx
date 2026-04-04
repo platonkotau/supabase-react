@@ -1,7 +1,9 @@
 
 import { useState } from 'react'
 import { supabase } from '../supabaseClient'
+import { useNavigate } from 'react-router-dom'
 function Login({setLogin , setPage}) {
+  const navigate = useNavigate()
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
   const [isLogin, setIsLogin] = useState(true)
@@ -14,7 +16,7 @@ function Login({setLogin , setPage}) {
         setMessage('Erorr:' + error.message)
       } else {
         setLogin(data.user)
-        setPage('profile')
+        navigate('/profile')
 
       }
     }

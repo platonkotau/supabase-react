@@ -2,8 +2,10 @@
 
 function Profile(){
     return(
-        <div>
-            <p>asdasd</p>
+        <div className="bg-gray-50">
+            <p
+            className="bg-gray-50"
+            >asdasd</p>
         </div>
     )
 }
